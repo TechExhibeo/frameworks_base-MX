@@ -3973,19 +3973,15 @@ public final class Settings {
             DISPLAY_TEMPERATURE_MODE,
             DISPLAY_AUTO_OUTDOOR_MODE,
             LIVE_DISPLAY_HINTED,
-<<<<<<< HEAD
             PHONE_BLACKLIST_ENABLED,
             PHONE_BLACKLIST_NOTIFY_ENABLED,
             PHONE_BLACKLIST_PRIVATE_NUMBER_MODE,
             PHONE_BLACKLIST_UNKNOWN_NUMBER_MODE,
-            PHONE_BLACKLIST_REGEX_ENABLED
-=======
+            PHONE_BLACKLIST_REGEX_ENABLED,
             NONE_IS_SILENT,
-            ALLOW_LIGHTS,
             INCREASING_RING,
             INCREASING_RING_START_VOLUME,
             INCREASING_RING_RAMP_UP_TIME
->>>>>>> 4099c00... Add back increasing ring feature (1/3)
         };
 
         /**
