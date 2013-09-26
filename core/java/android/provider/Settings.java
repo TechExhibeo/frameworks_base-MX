@@ -3569,6 +3569,11 @@ public final class Settings {
         public static final String PIE_BUTTONS_CONFIG_SECOND_LAYER =
                 "pie_buttons_config_second_layer";
 
+        /** Network speed indicator
+         * @hide
+         */
+        public static final String STATUS_BAR_TRAFFIC = "status_bar_traffic";
+
         /**
          * Forces formal text input.  1 to replace emoticon key with enter key.
          * @hide
