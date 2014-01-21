@@ -88,13 +88,6 @@
         <item name="android:textColor">@color/statusbar_expanded_text</item>
     </style>
 
-    <style name="TextAppearance.StatusBar.Traffic" parent="@*android:style/TextAppearance.StatusBar.Icon">
-        <!-- Note: must be dp to fit in status bar -->
-        <item name="android:textSize">14dp</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/status_bar_traffic_color</item>
-    </style>
-
     <style name="TextAppearance.StatusBar.Expanded.Clock">
         <item name="android:textSize">@dimen/qs_time_expanded_size</item>
         <item name="android:fontFamily">sans-serif-medium</item>

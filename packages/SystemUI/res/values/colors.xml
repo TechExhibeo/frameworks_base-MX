@@ -144,6 +144,4 @@
     <color name="pie_long_pressed_color">#ff8c8c8c</color>
     <color name="pie_outline_color">#ff5c5c5c</color>
 
-    <!-- Network speed indicator -->
-    <color name="status_bar_traffic_color">#FFFFFFFF</color>
 </resources>
