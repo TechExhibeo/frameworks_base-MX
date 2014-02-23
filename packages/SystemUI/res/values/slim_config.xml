@@ -24,5 +24,10 @@
     <!-- Doze: alternate schedule -->
     <string name="doze_pulse_schedule_alternate" translatable="false">1s</string>
 
+  <!-- Config Power Menu -->
+  <java-symbol type="drawable" name="ic_lock_screen_record" />
+  <java-symbol type="string" name="global_action_screen_record" />
+  <java-symbol type="bool" name="config_enableScreenrecordChord" />
+
 </resources>
 
