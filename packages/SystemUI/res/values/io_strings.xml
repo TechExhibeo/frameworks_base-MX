@@ -23,7 +23,9 @@
     <string name="app_float_item_title">Float view</string>
     <string name="app_stop_item_title">Kill app</string>
 
-    <!-- Liquid FIXME -->
-    <string name="Infinitive">Infinitive</string>	
+    <!-- Infinitive FIXME -->
+    <string name="Infinitive">Infinitive</string>
 
+    <!-- App circle bar -->
+    <string name="app_stop_item_title">Kill app</string>
 </resources>

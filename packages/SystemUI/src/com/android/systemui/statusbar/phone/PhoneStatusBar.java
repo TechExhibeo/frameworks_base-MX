@@ -1018,6 +1018,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         updateShowSearchHoldoff();
 
+        addAppCircleSidebar();
+
         // Setup pie container if enabled
         attachPieContainer(isPieEnabled());
 
@@ -1245,7 +1247,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNextAlarmController = new NextAlarmController(mContext);
         mKeyguardMonitor = new KeyguardMonitor();
         mUserSwitcherController = new UserSwitcherController(mContext, mKeyguardMonitor);
-        
         mWeatherController = new WeatherControllerImpl(mContext);
 
         mKeyguardUserSwitcher = new KeyguardUserSwitcher(mContext,
@@ -1747,7 +1748,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
         } else {
             // usual case: status bar visible & not immersive
-
             // show the ticker if there isn't already a heads up
             if (mHeadsUpNotificationView.getEntry() == null) {
                 tick(notification, true);
