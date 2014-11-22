@@ -14,13 +14,8 @@ Copyright (C) 2014 The Android Open Source Project
     limitations under the License.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-        android:width="8.2dp"
+        android:width="8.45dp"
         android:height="16.9dp"
-=======
-        android:width="8.5dp"
-        android:height="17dp"
->>>>>>> 19df806... SystemUI: Vector drawables for data activity resources
         android:viewportWidth="12.0"
         android:viewportHeight="24.0">
     <path
