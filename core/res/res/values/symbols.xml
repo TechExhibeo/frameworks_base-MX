@@ -2283,4 +2283,7 @@
   <!-- Package Manager -->
   <java-symbol type="array" name="config_disabledComponents" />
 
+  <!-- Power menu reboot -->
+  <java-symbol name="ic_lock_power_screenshot" type="drawable" />
+  <java-symbol name="global_action_screenshot" type="string" />
 </resources>
