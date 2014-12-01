@@ -3804,6 +3804,11 @@ public final class Settings {
         public static final String DISPLAY_LOW_POWER = "display_low_power";
 
         /**
+         * Boolean value on whether to show weather in the statusbar
+         */
+        public static final String STATUS_BAR_SHOW_WEATHER = "status_bar_show_weather";
+
+        /**
          * Use color enhancement feature of display
          * @hide
          */
