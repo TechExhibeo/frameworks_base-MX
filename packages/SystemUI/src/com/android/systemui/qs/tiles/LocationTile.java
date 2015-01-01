@@ -97,6 +97,7 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
         }
         mEnable.setAllowAnimation(true);
         mDisable.setAllowAnimation(true);
+        qsCollapsePanel();
     }
 
     @Override

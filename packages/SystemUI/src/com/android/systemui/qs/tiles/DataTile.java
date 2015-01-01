@@ -66,6 +66,7 @@ public class DataTile extends QSTile<QSTile.BooleanState> {
     public void handleClick() {
         if (dataSwitchEnabled()) {
             setEnabled(!mState.value);
+            qsCollapsePanel();
         } else {
             Intent intent = new Intent();
             intent.setComponent(new ComponentName(
