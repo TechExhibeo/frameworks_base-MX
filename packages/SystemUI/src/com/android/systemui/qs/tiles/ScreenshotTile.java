@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
+import android.provider.Settings;
 import android.os.RemoteException;
 import android.view.View;
 
@@ -59,7 +60,7 @@ public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
         mHost.collapsePanels();
         /* wait for the panel to close */
         try {
-             Thread.sleep(2000);
+             Thread.sleep(screenshotDelay() * 1000);
         } catch (InterruptedException ie) {
              // Do nothing
         }
@@ -87,6 +88,11 @@ public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
         state.visible = true;
         state.label = mContext.getString(R.string.quick_settings_screenshot);
         state.icon = ResourceIcon.get(R.drawable.ic_qs_screenshot);
+    }
+
+    private int screenshotDelay() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREENSHOT_DELAY, 2);
     }
 
     final Runnable mScreenshotTimeout = new Runnable() {
