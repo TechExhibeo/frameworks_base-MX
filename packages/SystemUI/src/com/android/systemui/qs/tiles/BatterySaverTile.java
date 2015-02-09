@@ -55,7 +55,6 @@ public class BatterySaverTile extends QSTile<QSTile.BooleanState> {
             mPowerMan.setPowerSaveMode(true);
         }
         refreshState();
-        qsCollapsePanel();
     }
 
     @Override
