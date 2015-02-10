@@ -3873,6 +3873,12 @@ public final class Settings {
         public static final String DISPLAY_TEMPERATURE_NIGHT = "display_temperature_night";
 
         /**
+	 * Status bar greeting
+	 * @hide
+	 */
+	public static final String STATUS_BAR_GREETING = "status_bar_greeting";
+
+        /**
          * Display color temperature adjustment mode, one of DAY (default), NIGHT, or AUTO.
          * @hide
          */
