@@ -3555,6 +3555,12 @@ public final class Settings {
         public static final String KEY_ASSIST_ACTION = "key_assist_action";
 
         /**
+         * Display second in the Clock
+         * @hide
+         */
+        public static final String CLOCK_USE_SECOND = "clock_use_second";
+
+        /**
          * Action to perform when the assistant (search) key is long-pressed.
          * (default: ACTION_VOICE_SEARCH)
          * (See ButtonsConstants.java for valid values)
