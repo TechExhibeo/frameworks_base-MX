@@ -554,6 +554,7 @@ public final class SystemServer {
         AssetAtlasService atlas = null;
         MediaRouterService mediaRouter = null;
         EdgeGestureService edgeGestureService = null;
+        KillSwitchService killSwitchService = null;
 
         // Bring up services needed for UI.
         if (mFactoryTestMode != FactoryTest.FACTORY_TEST_LOW_LEVEL) {
@@ -974,6 +975,14 @@ public final class SystemServer {
 
             if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_LIVE_TV)) {
                 mSystemServiceManager.startService(TvInputManagerService.class);
+            }
+
+            try {
+                Slog.i(TAG, "KillSwitch Service");
+                killSwitchService = new KillSwitchService(context);
+                ServiceManager.addService(Context.KILLSWITCH_SERVICE, killSwitchService);
+            } catch (Throwable e) {
+                reportWtf("starting KillSwitch Service", e);
             }
 
             if (!disableNonCoreServices) {
