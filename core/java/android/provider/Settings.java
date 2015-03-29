@@ -4397,6 +4397,12 @@ public final class Settings {
                 "volume_keys_control_ring_stream";
 
         /**
+         * Whether the notification light will be allowed when in zen mode during downtime
+         * @hide
+         */
+        public static final String ALLOW_LIGHTS = "allow_lights";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4479,7 +4485,8 @@ public final class Settings {
             NONE_IS_SILENT,
             INCREASING_RING,
             INCREASING_RING_START_VOLUME,
-            INCREASING_RING_RAMP_UP_TIME
+            INCREASING_RING_RAMP_UP_TIME,
+            ALLOW_LIGHTS
         };
 
         /**
