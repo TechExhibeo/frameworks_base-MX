@@ -867,7 +867,9 @@ public class VolumePanel extends Handler implements DemoMode {
                     mSliderPanel.addView(control.group);
                     control.group.setVisibility(View.VISIBLE);
                     control.expandPanel.setVisibility(View.GONE);
-                    updateSlider(control, true);
+                    control.secondaryIcon.setVisibility(View.GONE);
+                    control.divider.setVisibility(View.GONE);
+                    updateSlider(control, false);
                 }
             }
         }
@@ -882,7 +884,9 @@ public class VolumePanel extends Handler implements DemoMode {
                 if (control != null && control.streamType != mActiveStreamType) {
                     control.group.setVisibility(View.GONE);
                     control.expandPanel.setVisibility(View.GONE);
-                    updateSlider(control, true);
+                    control.secondaryIcon.setVisibility(View.GONE);
+                    control.divider.setVisibility(View.GONE);
+                    updateSlider(control, false);
                 }
             }
         }
