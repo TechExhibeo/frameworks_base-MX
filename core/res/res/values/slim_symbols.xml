@@ -176,4 +176,6 @@
   <!-- global actions -->
   <java-symbol type="id" name="option4" />
   <java-symbol type="id" name="option5" />
+
+  <java-symbol type="string" name="lock_to_app_toast_no_navbar" />
 </resources>
