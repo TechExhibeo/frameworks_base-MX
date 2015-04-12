@@ -1379,22 +1379,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             });
         }
 
-        // task manager
-        if (mContext.getResources().getBoolean(R.bool.config_showTaskManagerSwitcher)) {
-            mTaskManagerPanel =
-                    (LinearLayout) mStatusBarWindow.findViewById(R.id.task_manager_panel);
-            mTaskManager = new TaskManager(mContext, mTaskManagerPanel);
-            mTaskManager.setActivityStarter(this);
-            mTaskManagerButton = (ImageButton) mHeader.findViewById(R.id.task_manager_button);
-            mTaskManagerButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    showTaskList = !showTaskList;
-                    mNotificationPanel.setTaskManagerVisibility(showTaskList);
-                }
-            });
-        }
-
         // User info. Trigger first load.
         mHeader.setUserInfoController(mUserInfoController);
         mKeyguardStatusBar.setUserInfoController(mUserInfoController);
