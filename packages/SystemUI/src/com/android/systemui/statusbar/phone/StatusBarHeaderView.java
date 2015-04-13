@@ -33,6 +33,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Vibrator;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.telephony.TelephonyManager;
@@ -147,6 +148,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     private int mBatteryChargeLevel;
     private SettingsObserver mSettingsObserver;
     private boolean mShowWeather;
+    protected Vibrator mVibrator;
 
     public void updateBatteryIconSettings() {
         mBatteryView.updateBatteryIconSettings();
@@ -156,6 +158,9 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
 
     public StatusBarHeaderView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
+
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         loadShowBatteryTextSetting();
     }
 
@@ -616,10 +621,17 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         });
     }
 
+    public void vibrate (int duration) {
+        if (mVibrator != null) {
+            if (mVibrator.hasVibrator()) { mVibrator.vibrate(duration); }
+        }
+    }
+
     @Override
     public void onClick(View v) {
         if (v == mSettingsButton) {
             startSettingsActivity();
+            vibrate(20);
         } else if (v == mSystemIconsSuperContainer) {
             startBatteryActivity();
         } else if (v == mAlarmStatus && mNextAlarm != null) {
@@ -640,6 +652,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     public boolean onLongClick(View v) {
         if (v == mSettingsButton) {
             startSettingsLongClickActivity();
+            vibrate(20);
         } else if (v == mSystemIconsSuperContainer) {
             startBatteryLongClickActivity();
         } else if (v == mClock) {
