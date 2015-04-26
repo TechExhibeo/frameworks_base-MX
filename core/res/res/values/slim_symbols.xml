@@ -275,4 +275,6 @@
   <java-symbol type="string" name="setting_confirmation_yes" />
   <java-symbol type="string" name="setting_confirmation_no" />
 
+  <java-symbol type="array" name="config_externalCMServices" />
+
 </resources>
