@@ -173,4 +173,7 @@
   <!-- Ignored sms packages -->
   <java-symbol type="array" name="config_ignored_sms_packages" />
 
+  <!-- global actions -->
+  <java-symbol type="id" name="option4" />
+  <java-symbol type="id" name="option5" />
 </resources>
