@@ -950,15 +950,13 @@ public class InputMethodService extends AbstractInputMethodService {
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)
                     mFullscreenArea.getLayoutParams();
             if (isFullscreen) {
-                mFullscreenArea.setBackgroundDrawable(mThemeAttrs.getDrawable(
-                        com.android.internal.R.styleable.InputMethodService_imeFullscreenBackground));
                 lp.height = 0;
                 lp.weight = 1;
             } else {
-                mFullscreenArea.setBackgroundDrawable(null);
                 lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
                 lp.weight = 0;
             }
+            updateFullscreenBackground(isFullscreen);
             ((ViewGroup)mFullscreenArea.getParent()).updateViewLayout(
                     mFullscreenArea, lp);
             if (isFullscreen) {
@@ -977,6 +975,15 @@ public class InputMethodService extends AbstractInputMethodService {
             onConfigureWindow(mWindow.getWindow(), isFullscreen, !mShowInputRequested);
             mLastShowInputRequested = mShowInputRequested;
         }
+    }
+
+    private void updateFullscreenBackground(boolean shown)
+    {
+        if(shown)
+            mFullscreenArea.setBackgroundDrawable(mThemeAttrs.getDrawable(
+                    com.android.internal.R.styleable.InputMethodService_imeFullscreenBackground));
+        else
+            mFullscreenArea.setBackgroundDrawable(null);
     }
     
     /**
@@ -1040,9 +1047,7 @@ public class InputMethodService extends AbstractInputMethodService {
      * when the input method is in fullscreen mode, and thus showing extracted
      * text.  When false, the extracted text will not be shown, allowing some
      * of the application to be seen behind.  This is normally set for you
-     * by {@link #onUpdateExtractingVisibility}.  This controls the visibility
-     * of both the extracted text and candidate view; the latter since it is
-     * not useful if there is no text to see.
+     * by {@link #onUpdateExtractingVisibility}.
      */
     public void setExtractViewShown(boolean shown) {
         if (mExtractViewHidden == shown) {
@@ -1086,7 +1091,7 @@ public class InputMethodService extends AbstractInputMethodService {
                         this, animRes));
             }
         }
-        mFullscreenArea.setVisibility(vis);
+        updateFullscreenBackground(vis == View.VISIBLE);
     }
     
     /**
@@ -1209,7 +1214,7 @@ public class InputMethodService extends AbstractInputMethodService {
      * or {@link View#GONE View.GONE}) of the candidates view when it is not
      * shown.  The default implementation returns GONE when
      * {@link #isExtractViewShown} returns true,
-     * otherwise VISIBLE.  Be careful if you change this to return GONE in
+     * otherwise INVISIBLE.  Be careful if you change this to return GONE in
      * other situations -- if showing or hiding the candidates view causes
      * your window to resize, this can cause temporary drawing artifacts as
      * the resize takes place.
