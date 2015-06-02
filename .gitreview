@@ -1,0 +1,5 @@
+[gerrit]
+host=gerrit.aogp-devs.com
+port=29418
+project=frameworks_base.git
+defaultbranch=io-1.0
