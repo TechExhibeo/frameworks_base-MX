@@ -3976,6 +3976,12 @@ public final class Settings {
         public static final String NONE_IS_SILENT = "none_is_silent";
 
         /**
+         * Statusbar Infinitive logo
+         * @hide
+         */
+        public static final String STATUS_BAR_INFINITIVE_LOGO = "status_bar_infinitive_logo";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
