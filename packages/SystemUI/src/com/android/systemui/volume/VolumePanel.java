@@ -1813,7 +1813,6 @@ public class VolumePanel extends Handler implements DemoMode {
             super(context, attrs, defStyleAttr, defStyleRes);
         }
 
-        @Override
         protected int updateTouchProgress(int lastProgress, int newProgress) {
             final Object tag = getTag();
             if (tag instanceof StreamControl) {

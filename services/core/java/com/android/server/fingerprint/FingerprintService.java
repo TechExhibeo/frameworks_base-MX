@@ -221,9 +221,6 @@ public class FingerprintService extends SystemService {
                     try {
                         if (clientData != null && clientData.receiver != null) {
                             clientData.receiver.onRemoved(fingerId);
-                        } catch (RemoteException e) {
-                            Slog.e(TAG, "can't send message to client. Did it die?", e);
-                            mClients.removeAt(i);
                         }
                     } catch (RemoteException e) {
                         Slog.e(TAG, "can't send message to client. Did it die?", e);
