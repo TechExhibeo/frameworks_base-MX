@@ -349,10 +349,10 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         return dialog;
     }
 
-    private final class RebootAction extends SinglePressAction implements LongPressAction {
-        private RebootAction() {
-            super(com.android.internal.R.drawable.ic_lock_reboot,
-                R.string.global_action_reboot);
+    private final class PowerAction extends SinglePressAction implements LongPressAction {
+        private PowerAction() {
+            super(com.android.internal.R.drawable.ic_lock_power_off,
+                R.string.global_action_power_off);
         }
 
         @Override
@@ -373,7 +373,44 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
         @Override
         public void onPress() {
-            mWindowManagerFuncs.reboot();
+            final boolean quickbootEnabled = Settings.System.getInt(
+                    mContext.getContentResolver(), "enable_quickboot", 0) == 1;
+            // go to quickboot mode if enabled
+            if (quickbootEnabled) {
+                startQuickBoot();
+                return;
+            }
+            // shutdown by making sure radio and power are handled accordingly.
+            mWindowManagerFuncs.shutdown(false /* confirm */);
+        }
+    }
+
+    private final class RebootAction extends SinglePressAction {
+        private RebootAction() {
+            super(com.android.internal.R.drawable.ic_lock_power_reboot,
+                    R.string.global_action_reboot);
+        }
+
+        @Override
+        public boolean showDuringKeyguard() {
+            return true;
+        }
+
+        @Override
+        public boolean showBeforeProvisioning() {
+            return true;
+        }
+
+        @Override
+        public void onPress() {
+            try {
+                IPowerManager pm = IPowerManager.Stub.asInterface(ServiceManager
+                        .getService(Context.POWER_SERVICE));
+                pm.reboot(true, null, false);
+            } catch (RemoteException e) {
+                Log.e(TAG, "PowerManager service died!", e);
+                return;
+            }
         }
     }
 
@@ -464,35 +501,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                         com.android.internal.R.string.bugreport_status,
                         Build.VERSION.RELEASE,
                         Build.ID);
-            }
-        };
-    }
-
-    private Action getPowerAction() {
-        return new SinglePressAction(com.android.internal.R.drawable.ic_lock_power_off,
-                R.string.global_action_power_off) {
-
-            @Override
-            public void onPress() {
-                final boolean quickbootEnabled = Settings.System.getInt(
-                        mContext.getContentResolver(), "enable_quickboot", 0) == 1;
-                // go to quickboot mode if enabled
-                if (quickbootEnabled) {
-                    startQuickBoot();
-                    return;
-                }
-                // shutdown by making sure radio and power are handled accordingly.
-                mWindowManagerFuncs.shutdown(false /* confirm */);
-            }
-
-            @Override
-            public boolean showDuringKeyguard() {
-                return true;
-            }
-
-            @Override
-            public boolean showBeforeProvisioning() {
-                return true;
             }
         };
     }
