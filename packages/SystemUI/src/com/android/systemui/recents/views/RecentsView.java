@@ -143,21 +143,6 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
                 View v = getChildAt(i);
                 if (v != mSearchBar) {
                     TaskStackView stackView = (TaskStackView) v;
-                    stackView.setDebugOverlay(mDebugOverlay);
-                }
-            }
-        }
-
-        // Trigger a new layout
-        requestLayout();
-    }
-
-    public void dismissAllTasksAnimated() {
-        int childCount = getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            View child = getChildAt(i);
-            if (child != mSearchBar) {
-                TaskStackView stackView = (TaskStackView) child;
                 stackView.dismissAllTasks();
             }
         }
