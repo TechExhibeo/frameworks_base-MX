@@ -3582,6 +3582,15 @@ public final class Settings {
                 "key_camera_double_tap_action";
 
         /**
+         * Status bar weather temperature
+         * 0: Hide the temperature
+         * 1: Display the temperature with scale
+         * 2: Display the temperature without scale
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_WEATHER_TEMP = "status_bar_show_weather_temp";
+
+        /**
          * Whether pie controls are enabled
          * @hide
          */
