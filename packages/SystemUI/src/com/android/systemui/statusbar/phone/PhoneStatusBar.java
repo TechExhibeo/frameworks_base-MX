@@ -584,6 +584,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 attachPieContainer(isPieEnabled());
             }
             update();
+        }
 
             if (uri.equals(Settings.System.getUriFor(
                     Settings.System.NAVIGATION_BAR_BUTTON_TINT))
