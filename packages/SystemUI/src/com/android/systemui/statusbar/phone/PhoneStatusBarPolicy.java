@@ -68,6 +68,7 @@ public class PhoneStatusBarPolicy {
     private static final String SLOT_CDMA_ERI = "cdma_eri";
     private static final String SLOT_ALARM_CLOCK = "alarm_clock";
     private static final String SLOT_SU = "su";
+    private static final String SLOT_HEADSET = "headset";
 
     private static final String SDCARD_ABSENT = "sdcard_absent";
     private static final String SDCARD_KEYWORD = "SD";
@@ -116,6 +117,9 @@ public class PhoneStatusBarPolicy {
             else if (action.equals(Intent.ACTION_USER_SWITCHED)) {
                 updateAlarm();
             }
+            else if (action.equals(Intent.ACTION_HEADSET_PLUG)) {
+                updateHeadset(intent);
+            }
         }
     };
 
@@ -135,6 +139,7 @@ public class PhoneStatusBarPolicy {
         filter.addAction(TelephonyIntents.ACTION_SIM_STATE_CHANGED);
         filter.addAction(TelecomManager.ACTION_CURRENT_TTY_MODE_CHANGED);
         filter.addAction(Intent.ACTION_USER_SWITCHED);
+        filter.addAction(Intent.ACTION_HEADSET_PLUG);
         mContext.registerReceiver(mIntentReceiver, filter, null, mHandler);
 
         int numPhones = TelephonyManager.getDefault().getPhoneCount();
@@ -172,6 +177,10 @@ public class PhoneStatusBarPolicy {
         mService.setIconVisibility(SLOT_VOLUME, false);
         updateVolumeZen();
 
+        // headset
+        mService.setIcon(SLOT_HEADSET, R.drawable.stat_sys_headset, 0, null);
+        mService.setIconVisibility(SLOT_HEADSET, false);
+
         if (mContext.getResources().getBoolean(R.bool.config_showSdcardAbsentIndicator)) {
             mStorageManager = (StorageManager) context
                     .getSystemService(Context.STORAGE_SERVICE);
@@ -194,6 +203,11 @@ public class PhoneStatusBarPolicy {
         mService.setIconVisibility(SLOT_SU, false);
         mSuController.addCallback(mSuCallback);
 
+    }
+
+    private final void updateHeadset(Intent intent) {
+        int state = intent.getIntExtra("state", 0);
+        mService.setIconVisibility(SLOT_HEADSET, state == 1 ? true : false);
     }
 
     private final void updateSDCardtoAbsent() {
