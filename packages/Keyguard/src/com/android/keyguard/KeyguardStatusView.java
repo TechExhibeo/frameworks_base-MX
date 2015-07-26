@@ -43,8 +43,8 @@ import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
-import com.android.internal.util.liquid.WeatherController;
-import com.android.internal.util.liquid.WeatherControllerImpl;
+import com.android.internal.util.io.WeatherController;
+import com.android.internal.util.io.WeatherControllerImpl;
 import com.android.internal.util.slim.ImageHelper;
 import com.android.internal.widget.LockPatternUtils;
 
