@@ -70,6 +70,7 @@ import com.android.systemui.qs.tiles.ScreenTimeoutTile;
 import com.android.systemui.qs.tiles.SlimFloatsTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.SlimPieTile;
+import com.android.systemui.qs.tiles.KernelAdiutorTile;
 import com.android.systemui.settings.CurrentUserTracker;
 import com.android.systemui.statusbar.policy.BluetoothController;
 import com.android.systemui.statusbar.policy.CastController;
@@ -352,6 +353,8 @@ public class QSTileHost implements QSTile.Host {
                 return new SlimFloatsTile(this);
             case QSConstants.TILE_SLIMPIE:
                 return new SlimPieTile(this);
+            case QSConstants.TILE_KERNEL_ADIUTOR:
+                return new KernelAdiutorTile(this);
             default:
                 throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
         }
