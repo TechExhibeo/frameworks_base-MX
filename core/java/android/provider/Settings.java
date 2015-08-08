@@ -3868,6 +3868,12 @@ public final class Settings {
         public static final String NAVIGATION_BAR_CONFIG = "navigation_bar_config";
 
         /**
+         * Enable navigation bar double tap gesture to put device to sleep
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_DOUBLE_TAP_SLEEP = "navigation_bar_double_tap_sleep";
+
+        /**
          * Wether the navbar menu button is on the left/right/both
          * @hide
          */
