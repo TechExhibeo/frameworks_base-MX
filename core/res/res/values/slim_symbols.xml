@@ -277,4 +277,7 @@
 
   <java-symbol type="array" name="config_externalCMServices" />
 
+  <!-- Proximity check on screen on default -->
+  <java-symbol type="bool" name="config_proximityCheckOnWakeEnabledByDefault" />
+
 </resources>
