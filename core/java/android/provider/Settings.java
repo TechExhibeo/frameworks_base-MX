@@ -4142,6 +4142,13 @@ public final class Settings {
         public static final String SHAKE_CLEAN_RECENT = "shake_clean_recent";
 
         /**
+         * Shake to clean notifications
+         * @hide
+         *
+         */
+        public static final String SHAKE_TO_CLEAN_NOTIFICATIONS = "shake_to_clean_notifications";
+
+        /**
          * AOKP Custom System Animations
          * @hide
          */

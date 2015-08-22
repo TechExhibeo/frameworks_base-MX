@@ -145,6 +145,7 @@ import com.android.systemui.FontSizeUtils;
 import com.android.systemui.R;
 import com.android.systemui.doze.DozeHost;
 import com.android.systemui.doze.DozeLog;
+import com.android.systemui.doze.ShakeSensorManager;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.qs.QSPanel;
 import com.android.systemui.recent.ScreenPinningRequest;
@@ -205,7 +206,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
-        DragDownHelper.DragDownCallback, ActivityStarter {
+        DragDownHelper.DragDownCallback, ActivityStarter, ShakeSensorManager.ShakeListener {
     static final String TAG = "PhoneStatusBar";
     public static final boolean DEBUG = BaseStatusBar.DEBUG;
     public static final boolean SPEW = false;
@@ -307,6 +308,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private boolean mScreenOnComingFromTouch;
     private PointF mScreenOnTouchLocation;
     private boolean mHeadsUpViewAttached;
+
+    private ShakeSensorManager mShakeSensorManager;
+    private boolean enableShakeCleanByUser;
 
     int mPixelFormat;
     Object mQueueLock = new Object();
@@ -479,7 +483,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCK_SCREEN_ICON_COLOR),
-                    false, this, UserHandle.USER_ALL);			
+                    false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SCREEN_BRIGHTNESS_MODE),
                     false, this, UserHandle.USER_ALL);
@@ -560,6 +564,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_WEATHER_SIZE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SHAKE_TO_CLEAN_NOTIFICATIONS), false, this,
+                    UserHandle.USER_ALL);
             update();
         }
 
@@ -700,6 +707,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mWeatherTempStyle = Settings.System.getIntForUser(
                     resolver, Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE, 0,
                     UserHandle.USER_CURRENT);
+
+            enableShakeCleanByUser = Settings.System.getIntForUser(resolver,
+                    Settings.System.SHAKE_TO_CLEAN_NOTIFICATIONS, 1,
+                    UserHandle.USER_CURRENT) == 1;
 
             mWeatherTempColor = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF, mCurrentUserId);
@@ -1007,11 +1018,26 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mScreenPinningRequest.setCallback(mScreenPinningCallback);
     }
 
+    public synchronized void onShake() {
+        clearAllNotifications();
+    }
+
+    public void enableShake(boolean enableShakeClean) {
+        if (enableShakeClean && mScreenOnFromKeyguard) {
+            mShakeSensorManager.enable(20);
+        } else {
+            mShakeSensorManager.disable();
+        }
+    }
+
     // ================================================================================
     // Constructing the view
     // ================================================================================
     protected PhoneStatusBarView makeStatusBarView() {
         final Context context = mContext;
+
+        mShakeSensorManager = new ShakeSensorManager(mContext, this);
+        mShakeSensorManager.enable(20);
 
         Resources res = context.getResources();
 
@@ -2886,6 +2912,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
 
         mExpandedVisible = true;
+        enableShake(true && enableShakeCleanByUser);
         if (mNavigationBarView != null)
             mNavigationBarView.setSlippery(true);
 
