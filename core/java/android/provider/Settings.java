@@ -3920,6 +3920,13 @@ public final class Settings {
         public static final String QUICK_SETTINGS_TILES_VIBRATE = "quick_settings_vibrate";
 
         /**
+         * Toast icon
+         *
+         * @hide
+         */
+        public static final String TOAST_ICON = "toast_icon";
+
+        /**
          * Whether to use slim recents
          * @hide
          */
