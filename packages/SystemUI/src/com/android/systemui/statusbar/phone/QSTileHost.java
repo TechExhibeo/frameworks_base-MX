@@ -65,6 +65,7 @@ import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.SystemUIRestartTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.VisualizerTile;
+import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
@@ -358,6 +359,8 @@ public class QSTileHost implements QSTile.Host {
                 return new KernelAdiutorTile(this);
             case QSConstants.TILE_SYSTEMUI_RESTART:
                 return new SystemUIRestartTile(this);
+            case QSConstants.TILE_VOLUME:
+                return new VolumeTile(this);
             default:
                 throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
         }
