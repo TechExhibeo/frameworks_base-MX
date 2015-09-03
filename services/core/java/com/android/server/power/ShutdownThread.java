@@ -68,8 +68,6 @@ import java.io.OutputStreamWriter;
 
 import java.lang.reflect.Method;
 
-import com.android.internal.util.io.Helpers;
-
 public final class ShutdownThread extends Thread {
     // constants
     private static final String TAG = "ShutdownThread";
@@ -78,9 +76,6 @@ public final class ShutdownThread extends Thread {
     private static final int MAX_BROADCAST_TIME = 10*1000;
     private static final int MAX_SHUTDOWN_WAIT_TIME = 20*1000;
     private static final int MAX_RADIO_WAIT_TIME = 12*1000;
-
-    private static final String SOFT_REBOOT = "soft_reboot";
-    private static final String SYSTEMUI_REBOOT = "systemui_reboot";
 
     // length of vibration before shutting down
     private static final int SHUTDOWN_VIBRATE_MS = 500;
@@ -271,10 +266,6 @@ public final class ShutdownThread extends Thread {
     private static int getAdvancedReboot(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
                 Settings.Secure.ADVANCED_REBOOT, 0);
-    }
-
-    private static void doSystemUIReboot() {
-        Helpers.restartSystemUI();
     }
 
     private static class CloseDialogReceiver extends BroadcastReceiver
