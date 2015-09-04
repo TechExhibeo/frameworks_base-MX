@@ -63,7 +63,8 @@ public class ImageHelper {
     public static Bitmap drawableToBitmap (Drawable drawable) {
         if (drawable == null) {
             return null;
-        } else if (drawable instanceof BitmapDrawable) {
+        }
+        if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
@@ -75,6 +76,9 @@ public class ImageHelper {
     }
 
     private static Bitmap toGrayscale(Bitmap bmpOriginal) {
+        if (bmpOriginal == null) {
+            return null;
+        }
         int width, height;
         height = bmpOriginal.getHeight();
         width = bmpOriginal.getWidth();
