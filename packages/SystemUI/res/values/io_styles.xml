@@ -26,4 +26,8 @@
         <item name="android:divider">@null</item>
     </style>
 
+    <style name="TextAppearance.StatusBar.CarrierLabel" parent="@*android:style/TextAppearance.StatusBar.Icon">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
 </resources>
